@@ -18,7 +18,7 @@ exports.login = async (req, res) => {
         if (!user) {
             res.status(200).send({ errorUsername : "Ce nom d'utilisateur n'existe pas !" });       
         } else {
-            res.status(200).send({ authSuccess : "Connexion réussie ! " + user.username });
+            res.status(200).send({ authSuccess : "Connexion réussie ! "});
         }
     } catch (error){
         console.log(error)
