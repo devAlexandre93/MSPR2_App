@@ -5,6 +5,7 @@ import React, { useState } from "react";
 function Login() {
 
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -13,7 +14,7 @@ function Login() {
     axios({
       method: "post",
       url: "http://localhost:3001/auth/login",
-      data: { username }
+      data: { username, password }
     })
       .then((res) => {
         if (res.data.errorLogin || res.data.errorBrute || res.data.authSuccess) {
@@ -48,7 +49,13 @@ function Login() {
         />
 
         <label htmlFor="password">Mot de passe</label>
-        <input type="password" placeholder="Mot de passe" id="password" />
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          id="password"
+          onChange={(event) => {
+            setPassword(event.target.value);
+          }} />
 
         <div className="authMessage"></div>
 
