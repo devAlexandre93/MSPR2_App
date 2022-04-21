@@ -16,8 +16,8 @@ function App() {
       data: { username }
     })
       .then((res) => {
-        if (res.data.errorUsername || res.data.errorBrute || res.data.authSuccess) {
-          if (res.data.errorUsername) { authMessage.innerHTML = res.data.errorUsername }
+        if (res.data.errorLogin || res.data.errorBrute || res.data.authSuccess) {
+          if (res.data.errorLogin) { authMessage.innerHTML = res.data.errorLogin }
           if (res.data.authSuccess) { authMessage.innerHTML = res.data.authSuccess }
           if (res.data.errorBrute) { authMessage.innerHTML = res.data.errorBrute }
         }

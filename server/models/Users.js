@@ -4,15 +4,24 @@ module.exports = (sequelize, Datatypes) => {
         username: {
             type: Datatypes.STRING,
             allowNull: false
-        }/*,
+        },
+        email: {
+            type: Datatypes.STRING,
+            allowNull: true
+        },
+        validationToken: { 
+            type: Datatypes.STRING, 
+            unique: true ,
+            allowNull: true
+        },
         ipAddress: {
             type: Datatypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         mainWebBrowser: {
             type: Datatypes.STRING,
-            allowNull: false
-        }*/
+            allowNull: true
+        }
     });
 
     return Users;
