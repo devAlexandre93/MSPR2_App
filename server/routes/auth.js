@@ -9,6 +9,7 @@ const bruteForceLog = require('../middlewares/bruteForceLog');
 // Ajout des routes "auth"
 router.post('/signup', authCtrl.signUp);
 router.post('/login', bruteForceLog, authCtrl.login);
+router.post('/loginWithCode', bruteForceLog, authCtrl.loginWithCode);
 
 // Export
 module.exports = router;

@@ -9,7 +9,7 @@ module.exports = (sequelize, Datatypes) => {
             type: Datatypes.STRING,
             allowNull: true
         },
-        validationToken: { 
+        validationCode: { 
             type: Datatypes.STRING, 
             unique: true ,
             allowNull: true

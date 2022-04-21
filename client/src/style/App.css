@@ -124,3 +124,9 @@ button:hover {
   width: 100%;
   text-align: center;
 }
+
+.Home {
+  margin: 20% auto;
+  width: 700px;
+  font-size: large;
+}
