@@ -71,7 +71,7 @@ exports.login = async (req, res) => {
 
             // Send email when IP address doesn't match with the one of the database
             else if (user.ipAddress != ipA && user.ipAddress != null) {
-                console.log(user.ipAddress);
+                await user.update({ validationToken : token });
                 transport.sendMail({
                     from: "support@lechatelet.fr",
                     to: user.email,
@@ -88,6 +88,7 @@ exports.login = async (req, res) => {
 
             // Send email when the main web browser doesn't match with the one of the database
             else if (user.mainWebBrowser != browserName && user.mainWebBrowser != "") {
+                await user.update({ validationToken : token });
                 transport.sendMail({
                     from: "support@lechatelet.fr",
                     to: user.email,
