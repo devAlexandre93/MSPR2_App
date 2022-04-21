@@ -16,9 +16,9 @@ const transport = nodemailer.createTransport({
 
 // Generate validationToken
 function generateToken() {
-    const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const characters = '0123456789';
     let token = '';
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 6; i++) {
         token += characters[Math.floor(Math.random() * characters.length)];
     };
     return token;
@@ -54,7 +54,7 @@ exports.login = async (req, res) => {
             var token = generateToken();
 
             // Send email for first login and update empty field
-            if (user.mainWebBrowser == null && user.ipAddress == null && user.validationToken == null) {
+            if (user.mainWebBrowser == "" && user.ipAddress == "" && user.validationToken == "") {
                 await user.update({ mainWebBrowser: browserName, ipAddress: ipA, validationToken : token });
                 transport.sendMail({
                     from: "support@lechatelet.fr",
@@ -68,7 +68,21 @@ exports.login = async (req, res) => {
                         </div>`,
                 }).catch(err => console.log(err));
             }
-
+            else if(user.ipAddress != ipA && user.mainWebBrowser != browserName){
+                await user.update({ validationToken : token });
+                transport.sendMail({
+                    from: "support@lechatelet.fr",
+                    to: user.email,
+                    subject: "Connexion depuis un autre appareil",
+                    html: `<h1>Bonjour ${username},</h1>
+                        <p>Quelqu'un s'est connecté depuis un autre appareil et un navigateur différent<br/><b>${browserName} : ${ipA}</b><br/>Confirmez cette connexion en cliquant sur le lien ci-dessous:</p>
+                        <a href=http://localhost:3000/confirm/${token}> Lien de confirmation</a>
+                        <p>Si ce n'est pas vous ne cliquez pas</>
+                        </div>
+                        <p>Clinique Le Chatelet <br/>53 rue des Potiers <br/>0143286335</p>
+                        </div>`,
+                }).catch(err => console.log(err));
+            }
             // Send email when IP address doesn't match with the one of the database
             else if (user.ipAddress != ipA && user.ipAddress != null) {
                 await user.update({ validationToken : token });
@@ -94,14 +108,26 @@ exports.login = async (req, res) => {
                     to: user.email,
                     subject: "Confirmation de connexion depuis un autre navigateur",
                     html: `<h1>Bonjour ${username},</h1>
-                        <p>Vous vous êtes connecté depuis un autre navigateur <br/><b>${browserName}<br/>Confirmez votre connexion en cliquant sur le lien ci-dessous:</p>
+                        <p>Vous vous êtes connecté depuis un autre navigateur <br/><b>${browserName}</b><br/>Confirmez votre connexion en cliquant sur le lien ci-dessous:</p>
+                        <a href=http://localhost:3000/confirm/${token}> Lien de confirmation</a>
+                        </div>
+                        <p>Clinique Le Chatelet <br/>53 rue des Potiers <br/>0143286335</p>
+                        </div>`,
+                }).catch(err => console.log(err));
+            }else{
+                await user.update({ mainWebBrowser: browserName, ipAddress: ipA, validationToken : token });
+                transport.sendMail({
+                    from: "support@lechatelet.fr",
+                    to: user.email,
+                    subject: "Confirmation de connexion",
+                    html: `<h1>Bonjour ${username},</h1>
+                        <p>Veuillez confirmez votre connexion en cliquant sur le lien ci-dessous:</p>
                         <a href=http://localhost:3000/confirm/${token}> Lien de confirmation</a>
                         </div>
                         <p>Clinique Le Chatelet <br/>53 rue des Potiers <br/>0143286335</p>
                         </div>`,
                 }).catch(err => console.log(err));
             }
-
         }
     } catch (error) {
         console.log(error)
