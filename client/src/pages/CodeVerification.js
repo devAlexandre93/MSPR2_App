@@ -17,8 +17,8 @@ function CodeVerification() {
             data: { username, code }
         })
             .then((res) => {
-                if (res.data.errorCode) {
-                    authMessage.innerHTML = res.data.errorLogin
+                if (res.data.errorLoginWithCode) {
+                    authMessage.innerHTML = res.data.errorLoginWithCode
                 } else {
                     window.location = '/home';
                 }

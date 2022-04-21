@@ -149,7 +149,7 @@ exports.loginWithCode = async (req, res) => {
 
         // If credentials are incorrect
         if (!user || user.validationCode != code) {
-            res.status(200).send({ errorLogin: "Nom d'utilisateur ou code de vérification incorrect !" });
+            res.status(200).send({ errorLoginWithCode: "Nom d'utilisateur ou code de vérification incorrect !" });
 
             // If credentials are correct
         } else {
