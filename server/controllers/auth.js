@@ -174,6 +174,7 @@ exports.loginWithCode = async (req, res) => {
             // If credentials are correct
         } else {
             res.status(200).send({ authSuccess: "Success !" });
+            user.update({ validationCode: "" });
         }
     } catch (error) {
         console.log(error)
