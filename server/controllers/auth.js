@@ -72,7 +72,7 @@ exports.login = async (req, res) => {
                         from: "support@lechatelet.fr",
                         to: user.email,
                         subject: "Connectez-vous à votre portail !",
-                        html: `<h1>Bonjour ${username},</h1>
+                        html: `<h1>Bonjour ${user.firstname},</h1>
                     <p>Veuillez confirmez votre connexion en renseignant votre code de validation : <b>${code}</b> </p>
                     <p> <a href=http://localhost:3000/confirm> Cliquez ici</a> puis renseigner votre code de validation </p>
                     <div>
@@ -88,7 +88,7 @@ exports.login = async (req, res) => {
                         from: "support@lechatelet.fr",
                         to: user.email,
                         subject: "Tentative de connexion depuis une autre adresse IP et un autre navigateur",
-                        html: `<h1>Bonjour ${username},</h1>
+                        html: `<h1>Bonjour ${user.firstname},</h1>
                     <p>Quelqu'un s'est connecté depuis un autre appareil et un navigateur différent<br/><b> ${ipA} : ${browserName}</b><br/>Veuillez confirmez votre connexion en renseignant votre code de validation : <b>${code}</p>
                     <p> <a href=http://localhost:3000/confirm> Cliquez ici</a> puis renseigner votre code de validation </p>
                     <p>Si vous n'avez pas tenté de vous connecter, veuillez ignorer ce message</>
@@ -105,7 +105,7 @@ exports.login = async (req, res) => {
                         from: "support@lechatelet.fr",
                         to: user.email,
                         subject: "Tentative de connexion depuis une autre adresse IP",
-                        html: `<h1>Bonjour ${username},</h1>
+                        html: `<h1>Bonjour ${user.firstname},</h1>
                     <p>Quelqu'un s'est connecté depuis un autre appareil <br/><b>${browserName} : ${ipA}</b><br/>Veuillez confirmez votre connexion en renseignant votre code de validation : <b>${code}</p>
                     <p> <a href=http://localhost:3000/confirm> Cliquez ici</a> puis renseigner votre code de validation </p>
                     <p>Si vous n'avez pas tenté de vous connecter, veuillez ignorer ce message</>
@@ -122,7 +122,7 @@ exports.login = async (req, res) => {
                         from: "support@lechatelet.fr",
                         to: user.email,
                         subject: "Tentative de connexion depuis un autre navigateur",
-                        html: `<h1>Bonjour ${username},</h1>
+                        html: `<h1>Bonjour ${user.firstname},</h1>
                     <p>Vous vous êtes connecté depuis un autre navigateur <br/><b>${browserName}</b><br/>Veuillez confirmez votre connexion en renseignant votre code de validation : <b>${code}</p>
                     <p> <a href=http://localhost:3000/confirm> Cliquez ici</a> puis renseigner votre code de validation </p>
                     <p>Si vous n'avez pas tenté de vous connecter, veuillez ignorer ce message</>
@@ -138,7 +138,7 @@ exports.login = async (req, res) => {
                         from: "support@lechatelet.fr",
                         to: user.email,
                         subject: "Confirmation de connexion",
-                        html: `<h1>Bonjour ${username},</h1>
+                        html: `<h1>Bonjour ${user.firstname},</h1>
                     <p>Veuillez confirmez votre connexion en renseignant votre code de validation : <b>${code}</b> </p>
                     <p> <a href=http://localhost:3000/confirm> Cliquez ici</a> puis renseigner votre code de validation </p>
                     <p>Si vous n'avez pas tenté de vous connecter, veuillez ignorer ce message</>
